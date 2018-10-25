@@ -26,4 +26,8 @@ public class RuleUserRequest {
 
     private String nickName;
 
+    private Integer currentPage;
+
+    private Integer pageSize;
+
 }
