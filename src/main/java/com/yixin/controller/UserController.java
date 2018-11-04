@@ -25,11 +25,12 @@ public class UserController {
     @Autowired
     private RuleUserService userService;
 
+
     @ApiOperation(value = "获取用户", notes = "根据id查询用户信息")
     @ApiImplicitParam(name = "id", value = "用户id", required=true, dataType = "String")
     @ResponseBody
-    @GetMapping(value = "/queryUser")
-    public RuleUserResponse queryRuleUser(String id) {
+    @GetMapping(value = "/queryUser/{id}")
+    public RuleUserResponse queryRuleUser(@PathVariable String id) {
         RuleUserResponse resp = new RuleUserResponse();
         try {
             RuleUser user = userService.queryOne(id);
