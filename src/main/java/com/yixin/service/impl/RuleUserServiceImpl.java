@@ -1,11 +1,9 @@
 package com.yixin.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yixin.mapper.RuleUserMapper;
 import com.yixin.model.RuleUser;
-import com.yixin.model.RuleUserExample;
 import com.yixin.model.request.RuleUserRequest;
 import com.yixin.service.RuleUserService;
 import lombok.extern.log4j.Log4j2;
@@ -15,7 +13,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.weekend.WeekendSqls;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -26,7 +23,7 @@ import java.util.UUID;
  *
 */
 @Log4j2
-@Service
+@Service("RuleUserService")
 public class RuleUserServiceImpl implements RuleUserService{
 
     @Autowired
@@ -41,19 +38,19 @@ public class RuleUserServiceImpl implements RuleUserService{
 
     @Override
     public PageInfo<RuleUser> pageRuleUsers(RuleUserRequest request) {
-        RuleUserExample example = new RuleUserExample();
-        RuleUserExample.Criteria criteria = example.createCriteria();
+        Example example = new Example(RuleUser.class);
+        Example.Criteria criteria = example.createCriteria();
 
         if (StringUtils.isNotBlank(request.getAddress())) {
-            criteria.andAddressLike(MessageFormat.format("%{0}%", request.getAddress()));
+            criteria.andLike("address", MessageFormat.format("%{0}%", request.getAddress()));
         }
 
         if (StringUtils.isNotBlank(request.getUserName())) {
-            criteria.andUserNameLike(MessageFormat.format("%{0}%", request.getUserName()));
+            criteria.andLike("userName", MessageFormat.format("%{0}%", request.getUserName()));
         }
 
         PageHelper.startPage(request.getCurrentPage(), request.getPageSize());
-        List<RuleUser> userList = ruleUserMapper.selectByExampleWithBLOBs(example);
+        List<RuleUser> userList = ruleUserMapper.selectByExample(example);
 
         PageInfo<RuleUser> pageInfo = new PageInfo<>(userList);
 

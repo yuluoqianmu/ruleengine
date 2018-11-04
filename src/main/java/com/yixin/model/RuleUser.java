@@ -2,104 +2,73 @@ package com.yixin.model;
 
 import javax.persistence.*;
 
-@Table(name = "`rule_user`")
-public class RuleUser {
-    /**
-     * 主键id
-     */
-    @Id
-    @Column(name = "`id`")
-    private String id;
+@Table(name = "rule_user")
+public class RuleUser extends BaseEntity{
 
     /**
      * 用户名
      */
-    @Column(name = "`user_name`")
+    @Column(name = "user_name")
     private String userName;
 
     /**
      * 密码
      */
-    @Column(name = "`password`")
     private String password;
 
     /**
      * 年龄
      */
-    @Column(name = "`age`")
     private Integer age;
 
     /**
      * 性别
      */
-    @Column(name = "`sex`")
     private String sex;
 
     /**
      * 地址
      */
-    @Column(name = "`address`")
     private String address;
 
     /**
      * 邮箱
      */
-    @Column(name = "`email`")
     private String email;
 
     /**
      * 手机号
      */
-    @Column(name = "`telphone`")
     private String telphone;
 
     /**
      * 身份证号
      */
-    @Column(name = "`credit_card`")
+    @Column(name = "credit_card")
     private String creditCard;
 
     /**
      * 头像
      */
-    @Column(name = "`head_image_url`")
+    @Column(name = "head_image_url")
     private String headImageUrl;
 
     /**
      * 昵称
      */
-    @Column(name = "`nick_name`")
+    @Column(name = "nick_name")
     private String nickName;
 
     /**
      * 个人描述
      */
-    @Column(name = "`remark`")
     private String remark;
 
     /**
      * 图片
      */
-    @Column(name = "`picture`")
     private byte[] picture;
 
-    /**
-     * 获取主键id
-     *
-     * @return id - 主键id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * 设置主键id
-     *
-     * @param id 主键id
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
 
     /**
      * 获取用户名
